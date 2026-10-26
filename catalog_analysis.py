@@ -64,9 +64,34 @@ def decade_label(year):
             return "старые"
 
 
+def print_not_comedy(movies):
+    for movie in movies:
+        if "comedy" in movie["genres"]:
+            continue
+        print(movie["title"])
+
+
+def find_masterpiece(movies):
+    i = 0
+    while i < len(movies):
+        if movies[i]["rating"] > 9.0:
+            print("Первый шедевр:", movies[i]["title"])
+            break
+        i += 1
+    else:
+        print("Шедевров не найдено")
+
+
+def count_long_movies(movies, threshold=120):
+    count = 0
+    for movie in movies:
+        if movie["duration_min"] > threshold:
+            count += 1
+    return count
+
+
 if __name__ == "__main__":
-    print(average_rating(movies))
-    print(catalog_age_stats(movies))
-    print(duration_in_hours(155))
-    print(rating_tier(9.2))
-    print(decade_label(2024))
+    print_not_comedy(movies)
+    find_masterpiece(movies)
+    find_masterpiece([])
+    print(count_long_movies(movies))
